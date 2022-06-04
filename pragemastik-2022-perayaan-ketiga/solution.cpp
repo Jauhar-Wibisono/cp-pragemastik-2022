@@ -20,7 +20,7 @@ int main(){
 			for (int j=0; j<3; j++) area += x[(i+j)%n] * y[(i+j+1)%n] - x[(i+j+1)%n] * y[(i+j)%n];
 			areas.push_back(area);
 		}
-		if (n > 4) {
+		if (n > 4) { // gausah if juga gapapa
 			long long area = 0;
 			for (int j=0; j<4; j++) area += x[(i+j)%n] * y[(i+j+1)%n] - x[(i+j+1)%n] * y[(i+j)%n];
 			areas.push_back(area);
