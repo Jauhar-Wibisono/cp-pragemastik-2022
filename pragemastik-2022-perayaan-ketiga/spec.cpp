@@ -122,18 +122,12 @@ protected:
     }
 
     void TestCases() {
-        CASE(n = 4, x = {1, -1, -1, 1}, y = {1, 1, -1, -1});
-        CASE(n = 4, x = {1, 0, -1, 0}, y = {0, 1, 0, -1}); // min answer
-        CASE(n = 4, x = {maxxy, -maxxy, -maxxy, maxxy}, y = {maxxy, maxxy, -maxxy, -maxxy}); // max answer
-        for (int i=0; i<5; i++) {
-            CASE(
-                n = 4, 
-                x = {maxxy/2+rnd.nextInt(0, maxxy/2), -maxxy/2+rnd.nextInt(0, maxxy/2), -maxxy/2+rnd.nextInt(0, maxxy/2), maxxy/2+rnd.nextInt(0, maxxy/2)}, 
-                y = {maxxy/2+rnd.nextInt(0, maxxy/2), maxxy/2+rnd.nextInt(0, maxxy/2), -maxxy/2+rnd.nextInt(0, maxxy/2), -maxxy/2+rnd.nextInt(0, maxxy/2)}
-            );
-        }
-        for (int i=0; i<10; i++) CASE(n = 100, randomConvexPolygon(x, y, n, -100, 100));
-        for (int i=0; i<10; i++) CASE(n = 100, randomConvexPolygon(x, y, n, minxy, maxxy));
+        CASE(n = 4, x = {-1, -1, 1, 1}, y = {-1, 1, 1, -1});
+        CASE(n = 4, x = {-1, 0, 1, 0}, y = {0, 1, 0, -1}); // min answer
+        CASE(n = 4, x = {-maxxy, -maxxy, maxxy, maxxy}, y = {-maxxy, maxxy, maxxy, -maxxy}); // max answer
+        for (int i=0; i<10; i++) CASE(n = rnd.nextInt(4, 10), randomConvexPolygon(x, y, n, minxy, maxxy));
+        for (int i=0; i<10; i++) CASE(n = rnd.nextInt(11, 100), randomConvexPolygon(x, y, n, -100, 100));
+        for (int i=0; i<10; i++) CASE(n = rnd.nextInt(11, 500), randomConvexPolygon(x, y, n, minxy, maxxy));
         for (int i=0; i<4; i++) CASE(n = maxn, randomConvexPolygon(x, y, n, minxy, maxxy));
     }
 
