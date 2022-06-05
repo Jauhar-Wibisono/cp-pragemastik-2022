@@ -72,49 +72,32 @@ private:
 
 class TestSpec : public BaseTestSpec<ProblemSpec> {
 protected:
-   //  void SampleTestCase1() {
-   //      Input({
-   //      	"10 5",
-			// "9 1 6 7 2",
-			// "4 10 4 8 3"
-   //      });
-   //      Output({
-   //      	"1"
-   //      });
-   //  }
+    void SampleTestCase1() {
+        Input({
+            "5",
+            "-2 2",
+            "-1 5",
+            "2 5",
+            "4 0",
+            "0 -3"
+        });
+        Output({
+        	"15"
+        });
+    }
 
-   //  void SampleTestCase2(){
-   //  	Input({
-   //  		"2 2",
-   //  		"2 1",
-   //  		"1 2"
-   //  	});
-   //  	Output({
-   //  		"1"
-   //  	});
-   //  }
-
-   //  void SampleTestCase3(){
-   //  	Input({
-   //  		"5 3",
-   //  		"1 2 1",
-   //  		"4 4 5"
-   //  	});
-   //  	Output({
-   //  		"0"
-   //  	});
-   //  }
-
-   //  void SampleTestCase4(){
-   //  	Input({
-   //  		"200 3",
-   //  		"17 130 55",
-   //  		"187 23 79"
-   //  	});
-   //  	Output({
-   //  		"56"
-   //  	});
-   //  }
+    void SampleTestCase2(){
+    	Input({
+    		"4",
+            "0 0",
+            "1 1",
+            "2 0",
+            "1 -1"
+    	});
+    	Output({
+    		"2"
+    	});
+    }
 
     void BeforeTestCase(){
     	x.clear();
