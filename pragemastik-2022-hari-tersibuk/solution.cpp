@@ -87,6 +87,6 @@ int main(){
 	memset(lazy, 0, sizeof lazy);
 	dfs2(1, true);
 	for (int i=1; i<=n; i++) cout << ans[i] << ' ';
-	cout << '\n';
+	cout << '\n';P
 	return 0;
 }
