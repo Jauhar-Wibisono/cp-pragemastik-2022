@@ -34,7 +34,8 @@ int main(){
 	for (int i=1; i<=n; i++) cin >> l[i] >> r[i];
 	memset(dp, 0, sizeof dp);
 	dfs(1);
-	for (int i=1; i<=n; i++) cout << ans[i] << ' ';
-	cout << '\n';
+	for (int i=1; i<=n; i++) {
+		cout << ans[i] << (i == n ? '\n' : ' ');
+	}
 	return 0;
 }
