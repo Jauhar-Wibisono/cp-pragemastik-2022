@@ -10,7 +10,7 @@ int n, h;
 vector<int> adjl[maxn];
 int l[maxn], r[maxn];
 int sez[maxn], tin[maxn], tout[maxn], ver[maxn], tem;
-int segt[maxn], lazy[maxn];
+int segt[4*maxh], lazy[4*maxh];
 int ans[maxn];
 
 void dfs1(int u) {
@@ -64,9 +64,10 @@ void dfs2(int u, bool keep) {
 			}
 		}
 	}
+	update(1, h, 1, l[u], r[u], 1);
 	ans[u] = segt[1];
 	if (!keep) {
-		for (int t=tin[u]; t<=tout[u]; t++) {
+		for (int t=tin[u]; t<tout[u]; t++) {
 			update(1, h, 1, l[ver[t]], r[ver[t]], -1);
 		}
 	}
@@ -86,7 +87,8 @@ int main(){
 	memset(segt, 0, sizeof segt);
 	memset(lazy, 0, sizeof lazy);
 	dfs2(1, true);
-	for (int i=1; i<=n; i++) cout << ans[i] << ' ';
-	cout << '\n';P
+	for (int i=1; i<=n; i++) {
+		cout << ans[i] << (i == n ? '\n' : ' ');
+	}
 	return 0;
 }
