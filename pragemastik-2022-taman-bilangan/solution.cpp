@@ -1,3 +1,7 @@
+/* Author: Jauhar Wibisono
+ * O(2^n * n^5)
+ */
+
 #include <bits/stdc++.h>
 using namespace std;
 
@@ -28,10 +32,6 @@ int main(){
 			coords[a%n].emplace_back(i, j);
 		}
 	}
-	if (n == 1) {
-		cout << 0 << '\n';
-		return 0;
-	}
 	for (int i=0; i<n; i++) {
 		for (int j=0; j<n; j++) {
 			for (int k=0; k<n; k++) {
@@ -43,6 +43,16 @@ int main(){
 			}
 		}
 	}
+
+	// for (int i=0; i<n; i++) {
+	// 	for (int j=0; j<n; j++) {
+	// 		for (int k=0; k<n; k++) {
+	// 			cout << "(" << i << "," << j << "," << k << ") -> " << dist[i][i][j][k] << '\n';
+	// 		}
+	// 	}
+	// }
+	// cout << '\n';
+
 	for (int i=0; i<n; i++) {
 		for (int j=0; j<n; j++) {
 			for (int k=0; k<n; k++) {
@@ -58,19 +68,29 @@ int main(){
 			dp[i][s][s][1<<s] = 0;
 			for (int j=0; j<n; j++) {
 				if (j == s) continue;
-				dp[i][s][j][(1<<s)|(1<<j)] = dist[i][s][i][j];
+				dp[i][s][j][(1<<s)|(1<<j)] = dist[i][i][s][j];
 			}
 			for (int mask=1; mask<(1<<n); mask++) {
-				if (__builtin_popcount(mask) < 2) continue;
+				if (__builtin_popcount(mask) < 3) continue;
 				for (int j=0; j<n; j++) {
 					if (j == s || !on(mask, j)) continue;
 					for (int k=0; k<n; k++) {
-						if (!on(mask, k)) self_min(dp[i][s][k][mask|(1<<k)], dp[i][s][j][mask] + dist[i][i][j][k]);
+						if (k == s || !on(mask, k)) continue;
+						self_min(dp[i][s][k][mask], dp[i][s][j][mask&~(1<<k)] + dist[i][i][j][k]);
 					}
 				}
 			}
 		}
 	}
+
+	// for (int i=0; i<n; i++) {
+	// 	for (int j=0; j<n; j++) {
+	// 		for (int k=0; k<n; k++) {
+	// 			cout << "(" << i << "," << j << "," << k << ") -> " << dp[i][j][k][(1<<n)-1] << "\n";
+	// 		}
+	// 	}
+	// }
+
 	for (int i=0; i<(1<<n); i++) {
 		for (int j=0; j<n; j++) {
 			for (int k=0; k<n; k++) {
