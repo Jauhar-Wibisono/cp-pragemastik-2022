@@ -83,9 +83,12 @@ protected:
 
     void TestCases() {
         for (int i=0; i<20; i++) {
-            CASE(n = rnd.nextInt(2, 10), randomGrid(n, a));
+            CASE(n = rnd.nextInt(minn, 10), randomGrid(n, a));
         }
-        for (int i=0; i<20; i++) {
+        for (int i=0; i<10; i++) {
+            CASE(n = rnd.nextInt(11, maxn), randomGrid(n, a));
+        }
+        for (int i=0; i<10; i++) {
             CASE(n = maxn, randomGrid(n, a));
         }
     }
