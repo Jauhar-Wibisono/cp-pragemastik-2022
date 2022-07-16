@@ -35,6 +35,11 @@ protected:
         CONS(validTree(n, u, v));
     }
 
+    void StyleConfig() {
+        CustomScorer(); // validator.cpp/scorer.cpp is used
+        NoOutput(); // model solution output is not required
+    }
+
 private:
     bool eachElementBetween(const vector<int>& a, int mn, int mx) {
         for (int x : a) {
