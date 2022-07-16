@@ -37,7 +37,6 @@ protected:
 
     void StyleConfig() {
         CustomScorer(); // validator.cpp/scorer.cpp is used
-        NoOutput(); // model solution output is not required
     }
 
 private:
@@ -105,7 +104,7 @@ protected:
         }
 
         for (int i=0; i<10; i++) {
-            CASE(n = rnd.nextInt(minn, maxn), randomLine(n, u, v), randomArray(n, a, mina, maxa, rnd.nextInt(0, 100)));
+            CASE(n = rnd.nextInt(minn, maxn), randomLine(n, u, v), randomArray(n, a, mina, maxn, rnd.nextInt(0, 100)));
         }
 
         for (int i=0; i<6; i++) {

@@ -1,7 +1,11 @@
+/* Author: Jauhar Wibisono
+ *
+ */
+
 #include <bits/stdc++.h>
 using namespace std;
 
-const int maxn = 1e5+3, maxa = 1000000000;
+const int maxn = 1e5+3, maxa = 1000000;
 int n, a[maxn];
 vector<int> adjl[maxn];
 vector<int> leaf;
@@ -49,6 +53,8 @@ int main(){
 	for (int i=0; i<2; i++) {
 		ok = true;
 		for (int u=1; u<=n; u++) {
+			if (ans[i][u] < 1 || ans[i][u] > maxa) ok = false;
+
 			vector<int> cnt(2, 0);
 			for (int v : adjl[u]) cnt[ans[i][u] < ans[i][v]]++;
 			if (cnt[0] > 1 || cnt[1] > 1) ok = false;

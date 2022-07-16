@@ -34,61 +34,67 @@ int main(int argc, char* argv[]) {
         adjl[v].push_back(u);
     }
 
-    bool impossible = false;
+    vector<int> ans(n+1);
+    if (!(cin >> ans[1])) {
+        feedback << "not enough values" << endl;
+        return wa();
+    }
+    int impossible;
+    tc_out >> impossible;
+    if (impossible == -1) {
+        if (ans[1] != -1) {
+            feedback << "contestant has solution while judge doesn't" << endl;
+            return wa();
+        } else {
+            return ac();
+        }
+    }
+
+    for (int i=2; i<=n; i++) {
+        if (!(cin >> ans[i])) {
+            feedback << "not enough values" << endl;
+            return wa();
+        }
+    }
+
     for (int i=1; i<=n; i++) {
-        if (adjl[i].size() > 2) impossible = true;
-    }
-
-    if (impossible) {
-        int ans;
-        if (!(cin >> ans)) {
-            feedback << "no output" << endl;
+        if (ans[i] < mina || ans[i] > maxa) {
+            feedback << "value out of bounds: " << ans[i] << " on node " << i << endl;
             return wa();
         }
-        if (ans != -1) {
-            feedback << "contestant has answer while judge doesn't" << endl;
-            return wa(); 
-        }
-        return ac();
-    } else {
-        vector<int> ans(n+1);
-        for (int i=1; i<=n; i++) {
-            if (!cin >> ans[i]) {
-                feedback << "not enough values" << endl;
-                return wa();
-            }
-            if (ans[i] < mina || ans[i] > maxa) {
-                feedback << "value out of bounds" << endl;
-                return wa();
-            }
-        }
-
-        int leaf;
-        for (int i=1; i<=n; i++) {
-            if (adjl[i].size() == 1) leaf = i;
-        }
-
-        vector<int> ord;
-        queue<pair<int, int>> q;
-        q.emplace(leaf, 0);
-        while (!q.empty()) {
-            int u = q.front().first, p = q.front().second;
-            q.pop();
-            ord.push_back(ans[u]);
-            for (int v : adjl[u]) {
-                if (v == p) continue;
-                q.emplace(v, u);
-            }
-        }
-
-        vector<int> asc = ord, desc = ord;
-        sort(asc.begin(), asc.end());
-        sort(desc.rbegin(), desc.rend());
-        if (ord != asc && ord != desc) {
-            feedback << "non-sorted path exists" << endl;
+    }
+    for (int i=1; i<=n; i++) {
+        if (a[i] != -1 && ans[i] != a[i]) {
+            feedback << "contestant overwrote a non-(-1) value on node " << i << endl;
             return wa();
         }
-
-        return ac();
     }
+
+    int leaf;
+    for (int i=1; i<=n; i++) {
+        if (adjl[i].size() == 1) leaf = i;
+    }
+
+    vector<int> ord;
+    queue<pair<int, int>> q;
+    q.emplace(leaf, 0);
+    while (!q.empty()) {
+        int u = q.front().first, p = q.front().second;
+        q.pop();
+        ord.push_back(ans[u]);
+        for (int v : adjl[u]) {
+            if (v == p) continue;
+            q.emplace(v, u);
+        }
+    }
+
+    vector<int> asc = ord, desc = ord;
+    sort(asc.begin(), asc.end());
+    sort(desc.rbegin(), desc.rend());
+    if (ord != asc && ord != desc) {
+        feedback << "non-sorted path exists" << endl;
+        return wa();
+    }
+
+    return ac();
 }
