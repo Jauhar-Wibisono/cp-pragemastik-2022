@@ -97,6 +97,10 @@ protected:
         CASE(n = 6, randomTree(n, u, v), randomArray(n, a, 1, 10, 50));
         CASE(n = 6, randomTree(n, u, v), randomArray(n, a, 1, 10, 75));
         CASE(n = 6, randomTree(n, u, v), randomArray(n, a, 1, 10, 100));
+
+        for (int i=0; i<20; i++) {
+            CASE(n = rnd.nextInt(minn, 10), randomLine(n, u, v), randomYesArray(n, u, v, a, mina, n, rnd.nextInt(0, 100)));
+        }
         
         for (int i=0; i<20; i++) {
             CASE(n = rnd.nextInt(minn, maxn), randomLine(n, u, v), randomYesArray(n, u, v, a, mina, maxa, rnd.nextInt(0, 100)));
@@ -104,7 +108,7 @@ protected:
         }
 
         for (int i=0; i<10; i++) {
-            CASE(n = rnd.nextInt(minn, maxn), randomLine(n, u, v), randomArray(n, a, mina, maxn, rnd.nextInt(0, 100)));
+            CASE(n = rnd.nextInt(minn, maxn), randomLine(n, u, v), randomArray(n, a, mina, n, rnd.nextInt(0, 100)));
         }
 
         for (int i=0; i<6; i++) {
@@ -126,12 +130,28 @@ private:
         }
     }
 
+    void shuffleEdge(vector<int>& u, vector<int>& v) {
+        vector<int> permutation;
+        for (int i = 0; i < u.size(); i++) {
+            permutation.push_back(i);
+        }
+        rnd.shuffle(permutation.begin(), permutation.end());
+        vector<int> cu(u.size()), cv(u.size());
+        for (int i = 0; i < u.size(); i++) {
+            cu[i] = u[permutation[i]];
+            cv[i] = v[permutation[i]];
+        }
+        u = cu;
+        v = cv;
+    }
+
     void randomTree(int n, vector<int>& u, vector<int>& v) {
         for (int i = 1; i < n; i++) {
             u.push_back(i);
             v.push_back(rnd.nextInt(0, i - 1));
         }
         renumber(n, u, v);
+        shuffleEdge(u, v);
     }
 
     void randomLine(int n, vector<int>& u, vector<int>& v) {
@@ -140,6 +160,7 @@ private:
             v.push_back(i);
         }
         renumber(n, u, v);
+        shuffleEdge(u, v);
     }
 
     void randomArray(int n, vector<int>& a, int mn, int mx, int ratio) {
@@ -164,10 +185,11 @@ private:
             adjl[v[i]].push_back(u[i]);
         }
 
-        int leaf;
+        vector<int> leafs;
         for (int i=1; i<=n; i++) {
-            if (adjl[i].size() == 1) leaf = i;
+            if (adjl[i].size() == 1) leafs.push_back(i);
         }
+        int leaf = leafs[rnd.nextInt(0, 1)];
 
         a.resize(n);
         queue<pair<int, int>> q;

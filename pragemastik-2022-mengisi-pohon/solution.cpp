@@ -45,10 +45,10 @@ int main(){
 	while (!q.empty()) {
 		int u = q.front().first, w = q.front().second;
 		q.pop();
-		if (ans[0][u] != -1) continue;
-		if (a[u] == -1) ans[0][u] = w;
-		else ans[0][u] = a[u];
-		for (int v : adjl[u]) q.emplace(v, ans[0][u] - 1);
+		if (ans[1][u] != -1) continue;
+		if (a[u] == -1) ans[1][u] = w;
+		else ans[1][u] = a[u];
+		for (int v : adjl[u]) q.emplace(v, ans[1][u] - 1);
 	}
 	for (int i=0; i<2; i++) {
 		ok = true;
