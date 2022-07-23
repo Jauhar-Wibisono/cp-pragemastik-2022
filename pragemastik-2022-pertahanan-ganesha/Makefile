@@ -1,7 +1,7 @@
-PROB_ID = "balik"
+PROB_ID = "pertahanan"
 PROB_SLUG = $(shell basename $(CURDIR)) 
-PROB_NAME = "Membalik dan Menjumlahkan"
-TIME_LIMIT = 2
+PROB_NAME = "Pertahanan Ganesha"
+TIME_LIMIT = 1
 MEM_LIMIT = 256
 
 generate_problem:
