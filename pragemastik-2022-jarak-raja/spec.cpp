@@ -2,15 +2,15 @@
 using namespace tcframe;
 using namespace std;
 
-#define MAXN 100000
-#define MAXM 1000000000000000LL
+#define MAXN 100
+#define MINN 2
+#define MAXM 1000000000
 
 class ProblemSpec : public BaseProblemSpec {
 protected:
-	int N;
-	long long M;
-	vector<long long>R, C;
-	long long ans;
+	int N, M;
+	vector<int> R, C;
+	int ans;
 
 	void InputFormat() {
 	  LINE(M,N);
@@ -29,13 +29,13 @@ protected:
 
     void Constraints() {
         CONS(1 <= M && M <= MAXM);
-        CONS(2 <= N && N <= MAXN);
+        CONS(MINN <= N && N <= MAXN);
         CONS(rangeCheck(R, 1, M));
         CONS(rangeCheck(C, 1, M));
     }
 
 private:
-    bool rangeCheck(vector<long long> v, long long a, long long b){
+    bool rangeCheck(vector<int> v, int a, int b){
         for(int i = 0; i < v.size(); i++){
             if(v[i] < a || v[i] > b)
                 return false;
@@ -97,39 +97,39 @@ protected:
 
     void TestCases() {
     	// M besar, N kecil
-    	for (int i = 1; i <= 5; i++){
-    		CASE(M = MAXM, N = rnd.nextInt(1,100), randomArrayRange(N,R,1,M), randomArrayRange(N,C,1,M));
+    	for (int i = 1; i <= 20; i++){
+    		CASE(M = MAXM, N = rnd.nextInt(MINN,100), randomArrayRange(N,R,1,M), randomArrayRange(N,C,1,M));
     	}
     	// M kecil, N besar
-    	for (int i = 1; i <= 5; i++){
-    		CASE(M = rnd.nextInt(1,100), N = rnd.nextInt(1,MAXN), randomArrayRange(N,R,1,M), randomArrayRange(N,C,1,M));
+    	for (int i = 1; i <= 20; i++){
+    		CASE(M = rnd.nextInt(1,100), N = rnd.nextInt(MINN,MAXN), randomArrayRange(N,R,1,M), randomArrayRange(N,C,1,M));
     	}
     	// Ri Ci sama semua
-    	for (int i = 1; i <= 3; i++){
-    		long long r = rnd.nextLongLong(1,MAXM);
-    		long long c = rnd.nextLongLong(1,MAXM);
+    	for (int i = 1; i <= 10; i++){
+    		int r = rnd.nextInt(1,MAXM);
+    		int c = rnd.nextInt(1,MAXM);
     		CASE(M = MAXM, N = MAXN, randomArrayRange(N,R,r,r), randomArrayRange(N,C,c,c));
     	}
     	// M besar, N besar, Ri Ci unik
-    	for (int i = 1; i <= 10; i++){
+    	for (int i = 1; i <= 20; i++){
     		CASE(M = MAXM, N = MAXN, randomUniqueArrayRange(N,R,1,M), randomUniqueArrayRange(N,C,1,M));
     	}
     }
 
 private:
-    void randomArrayRange(int N, vector<long long> &v, long long lb, long long rb){
+    void randomArrayRange(int N, vector<int> &v, int lb, int rb){
     	v.clear();
     	for (int i = 0; i < N; i++){
-    		v.push_back(rnd.nextLongLong(lb,rb));
+    		v.push_back(rnd.nextInt(lb,rb));
     	}
     }
-    void randomUniqueArrayRange(int N, vector<long long> &v, long long lb, long long rb){
+    void randomUniqueArrayRange(int N, vector<int> &v, int lb, int rb){
     	v.clear();
-    	set<long long> ada;
+    	set<int> ada;
     	for (int i = 0; i < N; i++){
-    		long long tmp;
+    		int tmp;
     		do{
-    			tmp = rnd.nextLongLong(lb,rb);
+    			tmp = rnd.nextInt(lb,rb);
     		} while (ada.count(tmp));
     		ada.insert(tmp);
     		v.push_back(tmp);

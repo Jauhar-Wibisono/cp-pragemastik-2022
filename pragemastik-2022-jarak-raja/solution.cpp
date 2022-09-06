@@ -5,11 +5,11 @@
 #include<bits/stdc++.h>
 using namespace std;
 
-const long long maxx = 1e18+3;
-const int maxn = 1e5+3;
+const int maxx = 1e9+3;
+const int maxn = 103;
 int n;
-long long m, r[maxn], c[maxn];
-long long mnr, mnc;
+int m, r[maxn], c[maxn];
+int mnr, mnc;
 
 int main(){
 	ios_base::sync_with_stdio(0);cin.tie(0);
