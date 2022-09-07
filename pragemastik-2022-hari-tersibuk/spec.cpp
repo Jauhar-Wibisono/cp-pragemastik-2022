@@ -5,7 +5,7 @@ using namespace std;
 const int minn = 2;
 const int maxn = 200000;
 const int minh = 1;
-const int maxh = 200000; // sum bridge
+const int maxh = 200000;
 
 class ProblemSpec : public BaseProblemSpec {
 protected:
@@ -100,7 +100,7 @@ protected:
         for (int i=0; i<3; i++) {
             CASE(n = maxn, h = maxh, randomTree(n, p), randomSegs(n, h, l, r));
         }
-        CASE(n = maxn, h = maxh, kTree(n, 1, p), randomSegs(n, h, l, r));
+        CASE(n = maxn/4, h = maxh, kTree(n, 1, p), randomSegs(n, h, l, r));
         CASE(n = maxn, h = maxh, kTree(n, 2, p), randomSegs(n, h, l, r));
         CASE(n = maxn, h = maxh, kTree(n, n-1, p), randomSegs(n, h, l, r));
     }
