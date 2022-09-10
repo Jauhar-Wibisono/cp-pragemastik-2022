@@ -10,5 +10,6 @@ generate_problem:
 
 grade:
 	g++ -std=c++17 solution.cpp -o solution
+	
 	g++ -std=c++17 scorer.cpp -o scorer
 	./runner grade --solution=./solution --scorer=./scorer
