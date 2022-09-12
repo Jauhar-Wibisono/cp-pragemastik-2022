@@ -27,7 +27,7 @@ int main(){
 		if (adjl[i].size() == 1) {
 			leaf.push_back(i);
 		} else if (adjl[i].size() > 2) {
-			cout << "-1 \n";
+			cout << "-1\n";
 			return 0;
 		}
 	}
@@ -64,6 +64,6 @@ int main(){
 			return 0;
 		}
 	}
-	cout << "-1 \n";
+	cout << "-1\n";
 	return 0;
 }
