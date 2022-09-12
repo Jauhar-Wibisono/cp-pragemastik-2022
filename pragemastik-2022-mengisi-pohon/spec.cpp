@@ -20,8 +20,12 @@ protected:
         LINES(u, v) % SIZE(n-1);
     }
 
-    void OutputFormat() {
+    void OutputFormat1() {
         LINE(ans % SIZE(n));
+    }
+
+    void OutputFormat2() {
+        LINE(ans % SIZE(1));
     }
 
     void GradingConfig() {
