@@ -54,13 +54,17 @@ echo "    memory: $MEM_LIMIT" >> problem.yaml
 
 mkdir "data"
 
-# mungkin perlu add folder sample?
+# Add sample
+mkdir "data/sample"
+find "../$PROBLEM_SLUG/tc" -name "*sample*" -exec cp "{}" data/sample \;
+cd "data/sample"
+rename 's/\.out$/.ans/' *
+rename 's/^.*_//' *
+cd "../.."
 
 # Add testcase
 mkdir "data/secret"
-for testcases in "../$PROBLEM_SLUG/tc/*"; do
-    cp $testcases "data/secret"
-done
+find "../$PROBLEM_SLUG/tc" -name "*" ! -name "*sample*"  -exec cp "{}" data/secret \;
 cd "data/secret"
 rename 's/\.out$/.ans/' *
 rename 's/^.*_//' *
