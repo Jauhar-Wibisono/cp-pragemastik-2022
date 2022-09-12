@@ -73,12 +73,47 @@ private:
 
 class TestSpec : public BaseTestSpec<ProblemSpec> {
 protected:
-    // void SampleTestCase1() {
-    //     Input({
-    //     });
-    //     Output({
-    //     });
-    // }
+    void SampleTestCase1() {
+        Input({
+            "5",
+            "4 -1 -1 1 -1",
+            "1 3",
+            "4 5",
+            "5 2",
+            "2 1"
+        });
+        Output({
+            "4 3 10 1 2"
+        });
+    }
+
+    void SampleTestCase2() {
+        Input({
+            "5",
+            "4 -1 -1 -1 1",
+            "1 3",
+            "4 5",
+            "5 2",
+            "2 1"
+        });
+        Output({
+            "-1"
+        });
+    }
+
+    void SampleTestCase3() {
+        Input({
+            "5",
+            "4 -1 -1 1 -1",
+            "1 3",
+            "4 1",
+            "5 2",
+            "2 1"
+        });
+        Output({
+            "-1"
+        });
+    }
 
     void BeforeTestCase(){
         a.clear();
