@@ -23,5 +23,5 @@ int main(){
 		mnr=min(mnr, r[i+1]-r[i]);
 		mnc=min(mnc, c[i+1]-c[i]);
 	}
-	cout << max(mnr, mnc) << "\n";
+	cout << mnr + mnc << "\n";
 }
