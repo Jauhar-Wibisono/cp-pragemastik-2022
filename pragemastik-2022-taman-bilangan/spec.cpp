@@ -50,32 +50,28 @@ private:
 
 class TestSpec : public BaseTestSpec<ProblemSpec> {
 protected:
-    // void SampleTestCase1() {
-    //     Input({
-    //         "5",
-    //         "-2 2",
-    //         "-1 5",
-    //         "2 5",
-    //         "4 0",
-    //         "0 -3"
-    //     });
-    //     Output({
-    //     	"15"
-    //     });
-    // }
+    void SampleTestCase1() {
+        Input({
+            "2",
+            "1 2",
+            "4 3"
+        });
+        Output({
+        	"5"
+        });
+    }
 
-    // void SampleTestCase2(){
-    // 	Input({
-    // 		"4",
-    //         "0 0",
-    //         "1 1",
-    //         "2 0",
-    //         "1 -1"
-    // 	});
-    // 	Output({
-    // 		"2"
-    // 	});
-    // }
+    void SampleTestCase2(){
+    	Input({
+    		"3",
+            "5 6 2",
+            "9 1 8",
+            "4 7 3"
+    	});
+    	Output({
+    		"12"
+    	});
+    }
 
     void BeforeTestCase(){
     	a.clear();
@@ -83,13 +79,25 @@ protected:
 
     void TestCases() {
         for (int i=0; i<20; i++) {
-            CASE(n = rnd.nextInt(minn, 10), randomGrid(n, a));
+            CASE(n = rnd.nextInt(minn, 5), randomGrid(n, a));
+        }
+        for (int i=0; i<3; i++) {
+            CASE(n = rnd.nextInt(minn, 5), niceGrid(n, a));
         }
         for (int i=0; i<10; i++) {
             CASE(n = rnd.nextInt(11, maxn), randomGrid(n, a));
         }
+        for (int i=0; i<3; i++) {
+            CASE(n = rnd.nextInt(11, maxn), niceGrid(n, a));
+        }
         for (int i=0; i<10; i++) {
             CASE(n = maxn, randomGrid(n, a));
+        }
+        for (int i=0; i<2; i++) {
+            CASE(n = maxn, niceGrid(n, a));
+        }
+        for (int i=0; i<3; i++) {
+            CASE(sudokuLikeGrid(n, a));
         }
     }
 
@@ -105,5 +113,44 @@ private:
                 a[i][j] = perm[n*i+j];
             }
         }
+    }
+
+    void sudokuLikeGrid(int& n, vector<vector<int>>& a) {
+        n = 9;
+
+        vector<vector<int>> perm(n);
+        for (int i=1; i<=n*n; i++) perm[i%n].push_back(i);
+        for (int i=0; i<n; i++) rnd.shuffle(perm[i].begin(), perm[i].end());
+
+        vector<int> perm2(n);
+        for (int i=0; i<n; i++) perm2[i] = i+1;
+        rnd.shuffle(perm2.begin(), perm2.end());
+
+        a.resize(n);
+        for (int i=0; i<n; i++) a[i].resize(n);
+        for (int i=0; i<3; i++) {
+            for (int j=0; j<3; j++) {
+                for (int k=0; k<3; k++) {
+                    for (int l=0; l<3; l++) {
+                        int r = 3*i+k;
+                        int c = 3*j+l;
+                        a[r][c] = perm[perm2[3*i+j]][3*k+l];
+                    }
+                }
+            }
+        }
+    }
+
+    void niceGrid(int n, vector<vector<int>>& a) {
+        a.resize(n);
+        for (int i=0; i<n; i++) {
+            a[i].resize(n);
+            for (int j=0; j<n; j++) {
+                a[i][j] = n*i+j+1;
+            }
+        }
+
+        for (int i=0; i<n; i++) rnd.shuffle(a[i].begin(), a[i].end());
+        rnd.shuffle(a.begin(), a.end());
     }
 };
