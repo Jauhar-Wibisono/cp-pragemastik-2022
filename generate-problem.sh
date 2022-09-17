@@ -1,46 +1,44 @@
 #!/bin/sh
-
 # Usage: bash generate-problem.sh <id> <problem-slug/folder-name> <problem-name> <time-limit> <memory-limit> <dest-folder>
-
 # read -p 'Probid: ' PROBID
 # read -p 'Problem folder name: ' PROBLEM_SLUG
 # read -p 'Problem name: ' PROBLEM_NAME
 # read -p 'Time Limit: ' TIME_LIMIT
 # read -p 'Memory Limit: ' MEM_LIMIT
-
+#
 PROBID=$1
 PROBLEM_SLUG=$2
 PROBLEM_NAME=$3
 TIME_LIMIT=$4
 MEM_LIMIT=$5
 DEST_FOLDER=$6
-
+#
 mkdir $DEST_FOLDER || true
-
+#
 # Generate statement, solution, and testcases
 echo "preparing problem"
 cd "$PROBLEM_SLUG"
 # pdflatex "statement.tex"
 # rm *.aux *.log *.dvi *.out *.toc *.synctex.gz
-
+#
 g++ solution.cpp -O2 -Wall -o solution -std=c++17
 $TCFRAME_HOME/scripts/tcframe build
 ./runner
 cd ".."
-
+#
 echo "creating problem"
 rm -r "temp" || true
 mkdir "temp"
 cd "temp"
-
+#
 # Generate domjudge-problem.ini
 echo "probid=$PROBID" > domjudge-problem.ini
 echo "timelimit='$TIME_LIMIT'" >> domjudge-problem.ini
-
+#
 # Generate problem.yaml
 echo "---" > problem.yaml
 echo "name: $PROBLEM_NAME" >> problem.yaml
-
+#
 FILE=../$PROBLEM_SLUG/validator.cpp # whether custom checker is used
 if test -f "$FILE"; then
     echo "validation: custom" >> problem.yaml
@@ -48,12 +46,12 @@ if test -f "$FILE"; then
     mkdir "output_validators"
     cp "../$PROBLEM_SLUG/validator.cpp" "output_validators/validator.cpp"
 fi
-
+#
 echo "limits:" >> problem.yaml
 echo "    memory: $MEM_LIMIT" >> problem.yaml
-
+#
 mkdir "data"
-
+#
 # Add sample
 mkdir "data/sample"
 find "../$PROBLEM_SLUG/tc" -name "*sample*" -exec cp "{}" data/sample \;
@@ -61,7 +59,7 @@ cd "data/sample"
 rename 's/\.out$/.ans/' *
 rename 's/^.*_//' *
 cd "../.."
-
+#
 # Add testcase
 mkdir "data/secret"
 find "../$PROBLEM_SLUG/tc" -name "*" ! -name "*sample*"  -exec cp "{}" data/secret \;
@@ -69,10 +67,10 @@ cd "data/secret"
 rename 's/\.out$/.ans/' *
 rename 's/^.*_//' *
 cd "../.."
-
+#
 # Add statement
 # cp "../$PROBLEM_SLUG/statement.pdf" "problem.pdf"
-
+#
 # zipping everything
 zip -r "problem.zip" "."
 cp "problem.zip" "../$DEST_FOLDER/$PROBID.zip"
