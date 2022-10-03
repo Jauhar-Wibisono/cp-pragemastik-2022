@@ -19,8 +19,8 @@ int main(){
     long long pow2 = 1;
     for(int i=0; i<25; i++){
         for(int j=0; j<2; j++){
-            prefix[0][j] = 1-j;
-            suffix[n][j] = 1-j;
+            prefix[0][j] = 0;
+            suffix[n][j] = 0;
         }
 
         for(int j=1; j<=n; j++){
@@ -35,8 +35,8 @@ int main(){
         }
 
         for(int j=0; j<n; j++){
-            xorCount[0] = prefix[j][0] * suffix[j+1][0] + prefix[j][1] * suffix[j+1][1];
-            xorCount[1] = prefix[j][0] * suffix[j+1][1] + prefix[j][1] * suffix[j+1][0];
+            xorCount[0] = (prefix[j][0]+1) * (suffix[j+1][0]+1) + prefix[j][1] * suffix[j+1][1];
+            xorCount[1] = (prefix[j][0]+1) * suffix[j+1][1] + prefix[j][1] * (suffix[j+1][0]+1);
             if(a[i][j]){
                 // Addition kalau ganti bit
                 if(xorCount[1] >= xorCount[0]){

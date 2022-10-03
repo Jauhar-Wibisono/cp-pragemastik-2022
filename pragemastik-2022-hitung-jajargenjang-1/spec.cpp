@@ -3,7 +3,7 @@
 using namespace tcframe;
 using namespace std;
 
-const int maxn = 5000, maxm = 1e9;
+const int maxn = 1000, maxm = 1e9;
 
 class ProblemSpec : public BaseProblemSpec {
 protected:
@@ -13,8 +13,8 @@ protected:
 
 	void InputFormat() {
 	 	LINE(n);
-        LINE(x % SIZE(n))
-        LINE(y % SIZE(n))
+        LINE(x % SIZE(n));
+        LINE(y % SIZE(n));
 	}
 
     void OutputFormat() {
@@ -57,8 +57,8 @@ protected:
     void SampleTestCase2(){
     	Input({
     		"35",
-            "-3 -3 -3 -3 -3 -2 -2 -2 -2 -2 -1 -1 -1 -1 -1  0  0  0  0  0  1  1  1  1  1  2  2  2  2  2  3  3  3  3  3",
-            "-2 -1  0  1  2 -2 -1  0  1  2 -2 -1  0  1  2 -2 -1  0  1  2 -2 -1  0  1  2 -2 -1  0  1  2 -2 -1  0  1  2"
+            "-3 -3 -3 -3 -3 -2 -2 -2 -2 -2 -1 -1 -1 -1 -1 0 0 0 0 0 1 1 1 1 1 2 2 2 2 2 3 3 3 3 3",
+            "-2 -1 0 1 2 -2 -1 0 1 2 -2 -1 0 1 2 -2 -1 0 1 2 -2 -1 0 1 2 -2 -1 0 1 2 -2 -1 0 1 2"
     	});
     	Output({
     		"1968"
@@ -70,8 +70,8 @@ protected:
     }
 
     void TestCases() {
-        for (int maxVal = 2; maxVal <= 2048; maxVal *= 2) {
-            for(int m=625; m<maxn; m*=2){
+        for (int maxVal = 2; maxVal <= 1024; maxVal *= 2) {
+            for(int m=62; m<maxn; m*=2){
                 CASE(n = generateCoordinates(m, rnd.nextInt(1, 2e5), rnd.nextInt(0, 2e5), maxVal, x, y));
             }
         }
@@ -88,12 +88,12 @@ private:
             point.first = offsetX; point.second = offsetY;
             roll = rnd.nextInt(-maxVal+1, maxVal-1);
             point.first += roll * multX; point.second += roll * multY;
-            roll = rnd.nextInt(-maxal+1, maxVal-1);
+            roll = rnd.nextInt(-maxVal+1, maxVal-1);
             point.first -= roll * multY; point.second += roll * multX; 
             if(!(s.count(point))){
                 x.push_back(point.first);
                 y.push_back(point.second);
-                s.insert(point)
+                s.insert(point);
             }
         }
         return x.size();

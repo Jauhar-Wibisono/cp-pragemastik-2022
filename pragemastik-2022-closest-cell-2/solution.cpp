@@ -3,9 +3,10 @@ using namespace std;
 
 #define pll pair<long long, long long>
 
-const long long maxn = 131072, maxm = 2e9;
-long long node[2][2] = {{0, 0}, {0, 0}};
-long long segtree[2][2][50*maxn], range[2][2][50*maxn][2], childID[2][2][50*maxn][2];
+const long long maxn = 131072, maxm = 1e9;
+int node[2][2] = {{0, 0}, {0, 0}};
+long long segtree[2][2][30*maxn];
+int range[2][2][30*maxn][2], childID[2][2][30*maxn][2];
 
 void create(int id, int deg, long long l, long long r){
     //cout << node << " " << l << " " << r << endl;
@@ -107,10 +108,16 @@ int main(){
             nbTeman++;
         }
     }
-    long long minPower[2] = {1e18, 1e18};
+    long long minPower[2];
+    minPower[0] = 1e18;
+    minPower[1] = 1e18;
     for(int i=0; i<nbTeman; i++){
         minPower[0] = min(abTot.first - query(0, 0, -maxm, teman[i].first) - teman[i].first * query(0, 1, -maxm, teman[i].first), minPower[0]);
         minPower[1] = min(abTot.second - query(1, 0, -maxm, teman[i].second) - teman[i].second * query(1, 1, -maxm, teman[i].second), minPower[1]);
     }
-    cout << minPower[0] + minPower[1] << endl;
+    if(nbTeman){
+        cout << minPower[0] + minPower[1] << endl;
+    }else{
+        cout << 0 << endl;
+    }
 }
