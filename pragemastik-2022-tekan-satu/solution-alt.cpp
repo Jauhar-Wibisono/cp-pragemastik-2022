@@ -1,3 +1,7 @@
+/* Author: Jauhar Wibisono
+ * 
+ */
+
 #include <bits/stdc++.h>
 using namespace std;
 

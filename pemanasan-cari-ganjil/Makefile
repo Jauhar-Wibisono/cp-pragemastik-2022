@@ -1,7 +1,7 @@
-PROB_ID = "taman"
+PROB_ID = "ganjil"
 PROB_SLUG = $(shell basename $(CURDIR)) 
-PROB_NAME = "Taman Bilangan"
-TIME_LIMIT = 2
+PROB_NAME = "Cari Ganjil"
+TIME_LIMIT = 1
 MEM_LIMIT = 256
 
 generate_problem:
