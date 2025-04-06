@@ -6,16 +6,16 @@ Each problem (from A to M) has their own folder. The folder name is the `slug` o
 
 | Problem Code | Problem Slug   					| Problem Title             |
 | ------------ | ---------------------------------- | --------------------------|
-| A            | -							        | Closest Cell 2        	|
+| A            | pragemastik-2022-closest-cell-2    | Closest Cell 2        	|
 | B            | pragemastik-2022-jarak-benteng     | Jarak Benteng         	|
 | C            | pragemastik-2022-taman-bilangan    | Taman Bilangan			|
-| D            | -      							| Hitung Jajar Genjang 1 	|
-| E            | -     								| Bermain Jenga 		    |
+| D            | pragemastik-2022-hitung-jajargenjang-1 | Hitung Jajar Genjang 1 	|
+| E            | pragemastik-2022-jenga     				| Bermain Jenga 		    |
 | F            | pragemastik-2022-perayaan-ketiga   | Perayaan Ketiga	        |
 | G            | pragemastik-2022-sepasang-bintang 	| Sepasang Bintang			|
 | H            | pragemastik-2022-tekan-satu        | Tekan Satu	            |
-| I            | pragemastik-2022-menjadi-pustakawan| Menjadi Pustakawan        |
-| J            | -          						| Maksimalkan XOR       	|
+| I            | pragemastik-2022-menjadi-pustakawan | Menjadi Pustakawan        |
+| J            | pragemastik-2022-maksimalkan-xor   | Maksimalkan XOR       	|
 | K            | pragemastik-2022-kotak-pensil      | Kotak Pensil              |
 | L            | pragemastik-2022-mengisi-pohon     | Mengisi Pohon	            |
 | M            | pragemastik-2022-jembatan-layang   | Jembatan Layang           |
